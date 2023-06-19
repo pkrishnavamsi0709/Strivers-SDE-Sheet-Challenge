@@ -1,0 +1,81 @@
+DAY-1
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Code 1 :
+question: Set Matrix Zeroes
+link: https://leetcode.com/problems/set-matrix-zeroes/
+
+solution - Java:
+
+class Pair{
+    int row;
+    int col;
+    Pair(int row,int col){
+        this.row = row;
+        this.col = col;
+    }
+}
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        Queue<Pair> q = new LinkedList<>();
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // to add all the zeros to the queue
+
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(matrix[i][j] == 0){
+                    q.add(new Pair(i,j));
+                }
+            }
+        }
+
+        // this is for performing the row and col operation for all the zeros
+
+        while(!q.isEmpty()){
+            int row = q.peek().row;
+            int col = q.peek().col;
+            q.remove();
+
+            // top col
+            int i=row;
+            int j=col;
+            while(i>=0){
+                matrix[i][j]=0;
+                i--;
+            }
+
+            // right row
+            i=row;
+            j=col;
+            while(j<cols){
+              matrix[i][j]=0;
+              j++;
+            }
+
+            //bottom col
+            i=row;
+            j=col;
+            while(i<rows){
+                matrix[i][j]=0;
+                i++;
+            }
+
+            //left row
+            i=row;
+            j=col;
+            while(j>=0){
+                matrix[i][j]=0;
+                j--;
+            }
+        }
+
+        return ;
+
+    }
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+code -2
