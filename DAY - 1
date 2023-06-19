@@ -1,6 +1,6 @@
 DAY-1
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Code 1 :
+problem - 1 :
 question: Set Matrix Zeroes
 link: https://leetcode.com/problems/set-matrix-zeroes/
 
@@ -78,7 +78,7 @@ class Solution {
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-code -2
+problem - 2
 
 question: pascal triangle
 link:https://leetcode.com/problems/pascals-triangle/description/
@@ -113,3 +113,142 @@ class Solution {
     }
 }
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3
+
+question : Next Permutation
+link: https://leetcode.com/problems/next-permutation/
+
+solution -java:
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if(nums.length==1){
+            return ;
+        }
+        
+        if(nums.length==2){
+            int temp=nums[1];
+            nums[1]=nums[0];
+            nums[0]=temp;
+            return ;
+        }
+
+        else{
+            ArrayList<Integer> arr = new ArrayList<>();
+            int val=nums[nums.length-1];
+            int idx = nums.length-1 ;
+            int prev = nums[nums.length-1];
+            while(idx>=0){
+                if(prev>nums[idx]){
+                    arr.add(nums[idx]);
+                    break;
+                }
+                else{
+                    prev=nums[idx];
+                    arr.add(prev);
+                    idx--;
+                }
+            }
+
+
+            Collections.sort(arr);
+            if(idx==-1){
+                for(int i=0;i<nums.length;i++){
+                    nums[i]=arr.get(i);
+                }
+            }
+            else{
+                for(int i=0;i<arr.size();i++){
+                    if(nums[idx]<arr.get(i)){
+                        nums[idx]=arr.get(i);
+                        arr.remove(i);
+                        idx++;
+                        break;
+                    }
+                }
+                int i=0;
+                while(idx<nums.length){
+                    nums[idx]=arr.get(i);
+                    i++;
+                    idx++;
+                }
+            }
+            
+        }
+        return;
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem - 4
+
+questioin : Maximum subarray or kandanes alogirithm
+link : https://leetcode.com/problems/maximum-subarray/description/
+
+soltion -java:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxsum=nums[0];
+        int sum=nums[0];
+        if(nums.length==1){
+            return nums[0];
+        }
+        else{
+       for(int i=1;i<nums.length;i++){
+           if(sum<0){
+               sum=nums[i];
+           }
+           else{
+               sum=sum+nums[i];
+           }
+           if(maxsum<sum){
+               maxsum=sum;
+           }
+       } 
+    }
+    return maxsum;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem - 5
+
+question : Sort Colors(sort 0,1,2)
+link : https://leetcode.com/problems/sort-colors/
+
+solution - java:
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int count0=0;
+        int count1=0;
+        int count2=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==0){
+                count0++;
+            }
+            else if(nums[i]==1){
+                count1++;
+            }
+            else{
+                count2++;
+            }
+        }
+
+        for(int i=0;i<nums.length;i++){
+            if(count0>0){
+                nums[i]=0;
+                count0--;
+            }
+            else if(count1>0){
+                nums[i]=1;
+                count1--;
+            }
+            else{
+                nums[i]=2;
+                count2--;
+            }
+        }
+   }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
