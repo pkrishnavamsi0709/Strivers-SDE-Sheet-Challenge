@@ -1,0 +1,150 @@
+Day-3
+
+problem -1
+question:Search a 2D Matrix
+link:https://leetcode.com/problems/search-a-2d-matrix/
+
+solution - java:
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int low=0;
+        int high=matrix.length-1;
+        int mid=0;
+        while(low<=high){
+            mid = low + ((high-low)/2);
+            if(matrix[mid][0]<target){
+                low = mid +1 ;
+            }
+            else if (matrix[mid][0]>target){
+                high= mid-1;
+            }
+            else if(matrix[mid][0]==target){
+                return true;
+            }
+        }
+        System.out.print(mid);
+        if(matrix[mid][0]<target){
+            mid=mid;
+        }
+        else if(matrix[mid][0]>target){
+            if(mid>0){
+                mid=mid-1;
+            }
+            else{
+                return false;
+            }
+        }
+
+        low=0;
+        high=matrix[mid].length-1;
+        while(low<=high){
+            int mid1 = low + ((high-low)/2);
+            if(matrix[mid][mid1]<target){
+                low = mid1+1;
+            }
+
+            else if(matrix[mid][mid1]>target){
+                high = mid1-1;
+            }
+
+            else if(matrix[mid][mid1]==target){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+problem -2
+
+question:Majority Element
+link:https://leetcode.com/problems/majority-element/
+
+solution - java:
+class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        int prev=nums[0];
+        int count=0;
+        int val = nums.length/2;
+        for(int i=0;i<nums.length;i++){
+            if(prev == nums[i]){
+                count++;
+                if(count>val){
+                    return nums[i];
+                }
+            }
+            else{
+                prev=nums[i];
+                count=1;
+            }
+        }
+        return nums[0];
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+problem -3 
+question :Majority Element II
+link :https://leetcode.com/problems/majority-element-ii/
+
+solution -java:
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> arr = new ArrayList<>();
+        Arrays.sort(nums);
+        int prev=nums[0];
+        int count=0;
+        int val = nums.length/3;
+        for(int i=0;i<nums.length;i++){
+            if(prev == nums[i]){
+                count++;
+            }
+            else{
+                prev=nums[i];
+                count=1;
+            }
+            if(count>val){
+                    if(!arr.contains(nums[i])){
+                        arr.add(nums[i]);
+                    } 
+            }
+            
+        }
+        return arr;
+    }
+} 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -4
+ 
+ question:power of x
+ link:https://leetcode.com/problems/powx-n/description/
+ 
+ solution-java:
+ class Solution {
+    public double myPow(double x, int n) {
+        long val = n;
+        if(val<0) val=-1*val;
+        double ans=1.0;
+
+        while(val>0){
+            if(val%2==0){
+                x=x*x;
+                val=val/2;
+            }
+            else{
+                ans=ans*x;
+                val=val-1;
+            }
+        }
+
+        if(n<0){
+            ans = (double)(1)/(double)(ans);
+        }
+
+        return ans;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
