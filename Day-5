@@ -1,0 +1,241 @@
+Day-5
+
+problem -1 
+
+question : Linked List reverse
+link:https://leetcode.com/problems/reverse-linked-list/submissions/977878977/
+solution -java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode node = head;
+        if(node == null){
+            return head;
+        }
+        if(node.next == null){
+            return head;
+        }
+        else{
+            ListNode cur = head;
+            ListNode next = cur;
+            ListNode prev = null;
+
+            while(cur!=null){
+                next = cur.next;
+                cur.next = prev;
+                prev = cur;
+                cur = next;
+            }
+
+            return prev;
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -2
+
+question : middle number of linked list
+link :https://leetcode.com/problems/middle-of-the-linked-list/description/
+
+solution - java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode cur = head;
+        ListNode fast = head;
+        ListNode slow = head;
+        int count=0;
+        // while(cur!=null){
+        //     count++;
+        //     cur=cur.next;
+        // }
+
+        // while(fast.next!=null && fast.next.next!=null){
+        //     slow = slow.next;
+        //     fast = fast.next.next;
+        // }
+
+        // if(count%2==0){
+        //     return slow.next;
+        // }
+
+        // else{
+        //     return slow;
+        // }
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        
+
+        return slow;
+
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3
+
+question: merge two sorted linkedlist
+link:https://leetcode.com/problems/merge-two-sorted-lists/submissions/977918909/
+
+solution - java:
+ /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null && list2==null){
+            return list1;
+        }
+
+        else if(list1==null && list2!=null){
+            return list2;
+        }
+
+        else if(list1!=null && list2==null){
+            return list1;
+        }
+
+        else{
+            ListNode cur1 = list1;
+            ListNode cur2 = list2;
+            ListNode prev = null;
+            ListNode head = null;
+            while(cur1!=null && cur2!=null){
+                ListNode val=null;
+                if(cur1.val <= cur2.val){
+                    val = cur1;
+                    cur1 = cur1.next;
+                }
+                else{
+                    val = cur2;
+                    cur2= cur2.next;
+                }
+
+                if(prev == null){
+                        prev = val;
+                        head =val;
+                    }
+                else{
+                        prev.next = val;
+                        prev = prev.next;
+                    }
+            }
+
+            if(cur1!=null){
+                prev.next = cur1;
+            }
+            if(cur2!=null){
+                prev.next = cur2;
+            }
+
+            return head;
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+problem -4
+question : remove the nth element from the last
+link :https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+solution - java :
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode cur = head;
+        int count=0;
+        while(cur!=null){
+            count++;
+            cur = cur.next;
+        }
+        ListNode prev = null;
+        ListNode next = head;
+        cur = head;
+        if(count-n+1==1){
+            next = cur.next;
+            cur.next = null;
+            return next;
+        }
+        else if(n==1){
+            cur=head;
+            while(cur.next.next!=null){
+                cur=cur.next;
+            }
+            cur.next = null;
+        }
+        
+        else{
+            cur =head;
+            int counter=1;
+            while(cur!=null){
+                next = cur.next;
+                prev = cur;
+                cur =next;
+                if(counter+1 == count-n+1){
+                    prev.next = cur.next;
+                    return head;
+                }
+                else{
+                    counter++;
+                }
+            }
+        }
+        return head;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -5
+question - delete the node with out giving head
+link : https://leetcode.com/problems/delete-node-in-a-linked-list/description/
+solution - java :
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
