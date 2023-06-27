@@ -106,5 +106,63 @@ public class Solution {
         
     }
 }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+problem -4
+
+question :rotate the linked list
+link : https://leetcode.com/problems/rotate-list/description/
+solution - java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode cur = head;
+        if(head==null){
+            return null;
+        }
+        int count =0;
+        while(cur!=null){
+            count++;
+            cur = cur.next;
+        }
+
+        cur = head;
+        ListNode prev = null;
+        int val = k % count;
+        if(val==0){
+            return head;
+        }
+        count = count - val;
+        int count1=1;
+        while(count1<=count ){
+            count1++;
+            prev = cur;
+            cur = cur.next;
+        }
+
+        prev.next = null;
+
+        ListNode head1 = cur;
+        while(cur.next != null){
+            cur = cur.next;
+        }
+
+        cur.next =head;
+
+
+        return head1;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
