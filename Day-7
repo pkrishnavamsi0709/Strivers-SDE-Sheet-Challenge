@@ -27,3 +27,129 @@ class Solution {
 }
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -2
+
+question : to create a copy of the original ll
+link: https://leetcode.com/problems/copy-list-with-random-pointer/submissions/981774547/
+solution - java:
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        Node cur = head;
+        if(cur == null){
+            return null;
+        }
+
+        // Node prev = null;
+        // Node head1 = null;
+        // while(cur != null){
+        //     Node cur1 = new Node(cur.val);
+        //     if(prev != null){
+        //         prev.next = cur1;
+        //     }
+        //     else{
+        //         head1 = cur1;
+        //     }
+        //     cur = cur.next;
+        //     prev = cur1;
+        // }
+        // prev.next = null;
+    
+        // Node cur1 = head1;
+        // cur = head;
+        // while(cur1!= null){
+        //     if(cur.random == null){
+        //         cur1.random = null;
+        //     }
+        //     else{
+        //     Node cur2 = head1;
+        //     while(cur2 != null){
+        //         if(cur2.val == cur.random.val){
+        //             cur1.random = cur2;
+        //             break;
+        //         }
+        //         cur2 = cur2.next;
+        //     }
+        //     }
+        //     cur1 = cur1.next;
+        //     cur = cur.next;    
+        // }
+
+        while(cur != null){
+            Node cur1 = new Node(cur.val);
+            cur1.next = cur.next;
+            cur.next = cur1;
+            cur = cur1.next;
+        }
+
+        cur = head;
+        while(cur!= null){
+            if(cur.random != null){
+                cur.next.random = cur.random.next;
+            }
+           
+            
+            cur = cur.next.next;
+        }
+
+        Node dummy = new Node(0);
+    Node itr = head;
+    Node temp = dummy;
+    Node fast;
+    while(itr != null) {
+        fast = itr.next.next;
+        temp.next = itr.next;
+        itr.next = fast;
+        temp = temp.next;
+        itr = fast;
+    }
+    return dummy.next;
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3
+
+question : triplet sum
+link: https://leetcode.com/problems/3sum/submissions/981777960/
+solution - java:
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        int target = 0;
+        Arrays.sort(nums);
+        Set<List<Integer>> s = new HashSet<>();
+        List<List<Integer>> output = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++){
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum == target) {
+                    s.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    j++;
+                    k--;
+                } else if (sum < target) {
+                    j++;
+                } else {
+                    k--;
+                }
+            }
+        }
+        output.addAll(s);
+        return output;
+    }
+}
