@@ -1,0 +1,29 @@
+Day-7
+
+problem -1
+question : Remove Duplicates from Sorted Array
+link : https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+solution - java :
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length ==1){
+            return 1;
+        }
+        else{
+            int count =1;
+            int prev = nums[0];
+            int i = 0;
+            while(i<nums.length){
+                if(nums[i]!=prev){
+                    nums[count] = nums[i];
+                    prev = nums[i];
+                    count++;
+                }
+                i++;
+            }
+            return count;
+        }
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
