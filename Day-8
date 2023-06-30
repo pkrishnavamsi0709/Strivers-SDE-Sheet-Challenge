@@ -90,3 +90,30 @@ public class Solution {
     }
 }
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3
+
+question : subsets of the array
+link : https://leetcode.com/problems/subsets/description/
+solution - java:
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> temp = new ArrayList<>();
+        helper(nums,ans,temp,0);
+        return ans;
+    }
+
+    public void helper(int[] nums,List<List<Integer>> ans,ArrayList<Integer> temp,int index){
+        if(index >= nums.length){
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+
+        temp.add(nums[index]);
+        helper(nums,ans,temp,index+1);
+        //temp.remove(Integer.valueOf(nums[index]));
+        temp.remove(temp.size()-1);
+        helper(nums,ans,temp,index+1);
+        return;
+    }
+}
