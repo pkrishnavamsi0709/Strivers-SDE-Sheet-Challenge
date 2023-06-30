@@ -1,0 +1,79 @@
+Day-9
+
+problem -1
+question : inversioin of array
+link: https://www.codingninjas.com/studio/problems/count-inversions_615
+solution - java:
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static long getInversions(long arr[], int n) {
+        // Write your code here.
+        long count =0;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(arr[j]<arr[i]){
+                    count++;
+                }
+            }
+        }
+        return count;
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+problem -2 
+
+question : subset sum 
+link :  https://practice.geeksforgeeks.org/problems/subset-sums2234/1
+solution - java :
+class Solution{
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        helper(arr,ans,-1,0);
+        return ans;
+    }
+    
+    public void helper(ArrayList<Integer> arr , ArrayList<Integer> ans , int index , int sum){
+        if(index >= arr.size()-1){
+            ans.add(sum);
+            return;
+        }
+        
+        helper(arr,ans,index+1,sum+arr.get(index+1));
+        helper(arr,ans,index+1,sum);
+        return;
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3 
+
+question : reverse words 
+link :  https://leetcode.com/problems/reverse-words-in-a-string/
+solution - java :
+class Solution {
+    public String reverseWords(String s) {
+        String fin = "";
+        int n = s.length();
+        int idx = 0;
+        while(idx < n){
+            if(s.charAt(idx)!=' '){
+                System.out.println(idx);
+                String str = "";
+                while(idx < n && s.charAt(idx) != ' '){
+                    str += s.charAt(idx);
+                    idx++;
+                }
+                fin = " "+str+fin;
+                str = "";
+            }
+            idx++;
+        }
+        fin = fin.substring(1,fin.length());
+        return fin;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
