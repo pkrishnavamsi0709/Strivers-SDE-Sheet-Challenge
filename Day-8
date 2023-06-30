@@ -1,0 +1,92 @@
+Day-8
+
+problem -1:
+
+question :max no of 1s consecutive
+link : https://leetcode.com/problems/max-consecutive-ones/description/
+solution - java:
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count =0;
+        int maxcount = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1){
+                count++;
+            }
+            else{
+                count=0;
+            }
+            if(maxcount<count){
+                maxcount = count;
+            }
+        }
+        return maxcount;
+
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -2
+
+question : to find the intersection of  atwo linked list
+link : https://leetcode.com/problems/intersection-of-two-linked-lists/description/
+solution - java:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null){
+            return null;
+        }
+
+        ListNode a = headA;
+        ListNode b = headB;
+        int count1 = 0;
+        int count2 = 0;
+
+        while(a!=null){
+            count1++;
+            a = a.next;
+        }
+
+        while(b != null){
+            count2++;
+            b = b.next;
+        }
+
+        a = headA;
+        b = headB;
+        if(count1>count2){
+            int dif = 0;
+            while(dif < count1-count2){
+                a = a.next;
+                dif++;
+            }
+        }
+        else{
+            int dif = 0;
+            while(dif < count2-count1){
+                dif++;
+                b = b.next;
+            }
+        }
+
+        while(a != null){
+            if(a == b){
+                return a;
+            }
+            a = a.next;
+            b = b.next;
+        }
+        return null;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
