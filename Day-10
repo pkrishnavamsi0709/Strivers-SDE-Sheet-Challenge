@@ -1,0 +1,156 @@
+Day-10
+problem -1:
+question : unique subsets in the array
+link: https://leetcode.com/problems/subsets-ii/description/
+solution - java:
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        Set<ArrayList<Integer>> ans = new  HashSet<>();
+        ArrayList<Integer> temp = new ArrayList<>();
+        helper(nums,ans,temp,0);
+
+        List<List<Integer>> res = new ArrayList<>(ans);
+
+        return res;
+
+    }
+
+    public void helper(int[] nums,Set<ArrayList<Integer>> ans ,ArrayList<Integer> temp,int index){
+        if(index >= nums.length){
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+
+        temp.add(nums[index]);
+        helper(nums , ans , temp , index+1);
+        temp.remove(temp.size()-1);
+        helper(nums , ans , temp,index+1);
+        return;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem - 2:
+
+question : longest palindromic string
+link: https://leetcode.com/problems/longest-palindromic-substring/description/
+solution - java:
+class Solution {
+    public String longestPalindrome(String s) {
+       if(s.length() == 1){
+           return s;
+       }
+
+       if(s.length() == 2){
+           if(s.charAt(0) == s.charAt(1)){
+               return s;
+           }
+           else{
+               return ""+s.charAt(0);
+           }
+       }
+
+        int maxcount1=1;
+        int count = 0;
+        String final1 ="";
+        for(int i=0;i<s.length()-1;i++){
+            if(s.charAt(i) == s.charAt(i+1)){
+                System.out.println(i+" "+"even");
+                int left = i;
+                int right = i+1;
+                count = 0;
+                String str = "";
+                while(left >=0 && right<s.length() && s.charAt(left) == s.charAt(right)){
+                    str = s.charAt(left) + str + s.charAt(right);
+                    left--;
+                    right++;
+                    count++;
+                }
+
+                if(final1.length() < str.length()){
+                    maxcount1 = 2*count;
+                    final1 = str;
+                    System.out.print(final1);
+                }
+            }
+        }
+
+        count =0;
+        int  maxcount2 =1;
+        String final2 = "";
+        for(int i=1;i<s.length()-1;i++){
+            if(s.charAt(i-1) == s.charAt(i+1)){
+                System.out.println(i+" "+"odd");
+                int left = i-1;
+                int right = i+1;
+                String str = ""+s.charAt(i);
+                while(left >=0 && right<s.length() && s.charAt(left) == s.charAt(right)){
+                    
+                    str = s.charAt(left)+ str +s.charAt(right);
+                    left--;
+                    right++;
+                    count++;
+                }
+                if(final2.length() < str.length()){
+                    maxcount2 = 2*count+1;
+                    final2 = str;
+                    System.out.print(final2);
+                } 
+            }
+        }
+        if(final1.length() == 0 && final2.length() == 0){
+            return ""+s.charAt(0);
+        }
+        if(final1.length() >= final2.length()){
+            return final1;
+        }
+        else{
+            return final2;
+        }
+       
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+problem -3:
+question : longest consecutive sequence
+link:https://leetcode.com/problems/longest-consecutive-sequence/description/
+solution - java :
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        TreeSet<Integer> tree = new TreeSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(!tree.contains(nums[i])){
+                tree.add(nums[i]);
+            }
+        }
+        int prev=0;
+        if(nums.length>0){
+        prev = tree.first()-1;
+        }
+        else{
+            return 0;
+        }
+        int count=0;
+        int maxcount=0;
+        for(Integer it : tree){
+           System.out.println(prev+" "+it);
+           
+            if(prev+1==it){
+                count++;
+                prev=it;
+            
+            if(maxcount<count){
+                maxcount=count;
+            }
+            }
+            else{
+                count=1;
+                prev=it;
+            }
+            
+        }
+        return maxcount;
+
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
